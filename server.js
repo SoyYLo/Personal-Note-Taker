@@ -9,13 +9,13 @@ const PORT = 3001;
 
 // data parsing
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.json());
-
 // Middleware pointing to public folder
 app.use(express.static('public'));
 
-// rest of code........
+
+require("./routes/html-routes.js")(app);
+require("./routes/api/noteRoutes")(app);
 
 
 app.use(routes)
