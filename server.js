@@ -14,9 +14,10 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-require("./routes/html-routes.js")(app);
-require("./routes/api/noteRoutes")(app);
-
+//require("./routes/html-routes.js")(app);
+//require("./routes/api/noteRoutes")(app);
+app.use("/", require("./routes/html-routes.js"));
+app.use('/api', require("./routes/api/noteRoutes"));
 
 app.use(routes)
 app.listen(PORT, function() {
