@@ -129,10 +129,8 @@ const handleRenderBtns = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
+  try{
   let jsonNotes = await notes.json();
-  if (window.location.pathname === '/notes') {
-    noteList.forEach((el) => (el.innerHTML = ''));
-  }
 
   let noteListItems = [];
 
@@ -179,6 +177,11 @@ const renderNoteList = async (notes) => {
   if (window.location.pathname === '/notes') {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
+  }
+  catch(e){
+    console.log(e);
+  }
+  
 };
 
 // Gets notes from the db and renders them to the sidebar

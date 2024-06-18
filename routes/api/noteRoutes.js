@@ -7,9 +7,8 @@ const dbPath = path.join( __dirname,"../../db/db.json")
 // Routes
 
 // Get request
-router.get("", (req,res) => {
+router.get("/", (req,res) => {
 let data = fs.readFileSync(dbPath, "utf8");
-
 res.json(JSON.parse(data));
 });
 
@@ -29,9 +28,8 @@ router.post("/", (req,res) => {
     };
     dataJSON.push(newNote)
     fs.writeFileSync(dbPath, JSON.stringify(dataJSON))
-    res.json("ADDED IT!")
+    res.json(dataJSON)
 })
-
 // Delete request
 router.delete("//path to notee//", (req, res) => {
     let data = fs.readFileSync(dbPath, "utf8");
