@@ -3,7 +3,8 @@ const router = require("express").Router()
 const { json } = require("express");
 const fs = require("fs")
 const path = require("path")
-const dbPath = path.join( __dirname,"../../db/db.json")
+const dbPath = path.join( __dirname,"../../db/db.json");
+
 // Routes
 
 // Get request
@@ -24,26 +25,19 @@ router.post("/", (req,res) => {
     console.log(req.body)
     const newNote = {
         ...req.body,
-        // id: uniqid(),
+        id: uniqid(),
     };
     dataJSON.push(newNote)
     fs.writeFileSync(dbPath, JSON.stringify(dataJSON))
     res.json(dataJSON)
 })
 // Delete request
-router.delete("//path to notee//", (req, res) => {
+router.delete("/notes/:id", (req, res) => {
     let data = fs.readFileSync(dbPath, "utf8");
     const dataJSON = JSON.parse(data);
 
     const newNotes = dataJSON.filter((note) => {
         return note.id !== req.params.id;
-    });
-
-    fs.writeFile(dbPath, JSON.stringify(newNotes), (err, text) => {
-        if (err) {
-            crossOriginIsolated.error(err);
-            return;
-        }
     });
     res.json(newNotes);
 });
